@@ -24,16 +24,56 @@ Kostnaden bygger på tre delar:
 
 ## Virtual warehouse – skalning
 
-- Scaling up (vertikalt): byt till en större T-shirt-storlek (XS → S → M → L…), fler compute nodes → fler credits/timme. Bra för stora men få arbetsbelastningar.
-- Scaling out (horisontellt): kör flera kluster av samma storlek parallellt, kan ställas in att skala automatiskt. Bra för många parallella arbetsbelastningar.
+### Scaling up (vertikalt):
 
-## Database och schema
+- byt till en större T-shirt-storlek (XS → S → M → L…), fler compute nodes → fler credits/timme. Bra för stora men få arbetsbelastningar.
+
+- samma wahouse men gör det större
+
+![scaling up ](images/scaling_up.png)
+
+### Scaling out (horisontellt):
+
+- kör flera kluster av samma storlek parallellt, kan ställas in att skala automatiskt. Bra för många parallella arbetsbelastningar.
+
+- flera kluster som används i olika warehouses
+
+- flera querys samtidigt - bra att använda
+
+![scaling out ](images/scaling_out.png)
+
+## Database och schema object
 
 Ett account kan innehålla flera databaser, och varje databas innehåller flera schemas som organiserar objekt som tabeller och vyer.
 
+![schemas_database](images/database_schemas.png)
+
 ## Different types of Tables in Snowflake
 
-![tables](notes/images/tables_sf.png)
+- storage time är olika beroende på vilket table
+
+### Temporary table
+
+- Automatiskt droppad efter sessionen
+- No backup eller sparning
+- session
+
+### Transient table
+
+- no time-travel
+- no fail-safe
+- short-term
+
+### Permanent table
+
+- time-travel
+- fail-safe
+- long-term
+
+### External table
+
+- own cloud subscription (like Azure)
+- ![tables](images/tables_sf.png)
 
 ## Connect to VSC
 
@@ -55,10 +95,6 @@ Ett account kan innehålla flera databaser, och varje databas innehåller flera 
 
 # Snowflake navigation web UI
 
-### Compute
-
-- Warehouses - the warehouses that we have
-
 ### Sql file
 
 - click on the + "sql file"
@@ -68,8 +104,16 @@ Ett account kan innehålla flera databaser, och varje databas innehåller flera 
 ### Databases
 
 - catalog -> database explorer
-- explore schemas, tables
+- explore schemas -> tables
 - check data in data preview
+
+#### Query History
+
+- in each database you can see the query history
+
+#### Suspend
+
+- dont forgett to suspent the database
 
 ## Monitoring
 
@@ -90,3 +134,12 @@ Ett account kan innehålla flera databaser, och varje databas innehåller flera 
 - Browse data
   - Click on get
 - Sell data
+
+### Compute
+
+- warehouses that we have
+- create warehouse
+
+![warehouse](images/warehouse.png)
+
+- suspend (shut it down and stop the cost)
